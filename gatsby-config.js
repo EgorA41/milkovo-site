@@ -7,6 +7,7 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -15,6 +16,7 @@ module.exports = {
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    'gatsby-plugin-postcss',
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -40,4 +42,4 @@ module.exports = {
       },
     },
   ],
-}
+};
