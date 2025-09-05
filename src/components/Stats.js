@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function Stats() {
   const data = [
     { value: "7", label: "НАСЕЛЕННЫХ ПУНКТОВ" },
