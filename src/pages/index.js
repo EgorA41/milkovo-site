@@ -1,13 +1,19 @@
-import * as React from 'react';
-import Header from '../components/header';
-import Footer from '../components/footer';
+import React from "react";
+import Layout from "../components/Layout";
+import Map from "../components/Map";
+import Stats from "../components/Stats";
+import HeroText from "../components/HeroText";
 
 export default function HomePage() {
   return (
-    <main>
-      <Header />
-      <h1>Milkovo.рф</h1>
-      <Footer />
-    </main>
+    <Layout>
+      <Map />
+      <div className="absolute top-20 left-1/3">
+        <Stats />
+      </div>
+      <div className="absolute bottom-12 right-16 max-w-md">
+        <HeroText />
+      </div>
+    </Layout>
   );
 }
