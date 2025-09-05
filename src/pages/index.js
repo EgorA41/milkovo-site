@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/temp-layout";
 import Map from "../components/Map";
 import Stats from "../components/Stats";
 import HeroText from "../components/HeroText";
