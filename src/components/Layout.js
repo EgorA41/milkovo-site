@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./temp-header";
+import Header from "./Header";
 import SidebarLeft from "./SidebarLeft";
 import SidebarRight from "./SidebarRight";
 
