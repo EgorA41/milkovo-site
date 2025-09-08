@@ -2,14 +2,31 @@ import React from "react";
 
 export default function SidebarLeft() {
   return (
-    <aside className="w-64 bg-slate-800/50 p-4">
-      {/* Левый сайдбар */}
-      <nav>
-        <ul className="space-y-2">
-          <li><a href="/" className="text-white hover:text-teal-400">Главная</a></li>
-          <li><a href="/routes" className="text-white hover:text-teal-400">Маршруты</a></li>
-          <li><a href="/places" className="text-white hover:text-teal-400">Места</a></li>
-        </ul>
+    <aside className="w-64 p-6 text-white">
+      <nav className="space-y-6">
+        <div className="pb-2">
+          <h3 className="text-lg font-medium border-b-2 border-teal-400 pb-2 inline-block">
+            Населенные пункты
+          </h3>
+        </div>
+
+        <div className="py-2">
+          <h3 className="text-lg font-medium hover:text-teal-400 cursor-pointer transition-colors">
+            Правила отдыха
+          </h3>
+        </div>
+
+        <div className="py-2">
+          <h3 className="text-lg font-medium hover:text-teal-400 cursor-pointer transition-colors">
+            Реки и озера
+          </h3>
+        </div>
+
+        <div className="py-2">
+          <h3 className="text-lg font-medium hover:text-teal-400 cursor-pointer transition-colors">
+            Спец службы
+          </h3>
+        </div>
       </nav>
     </aside>
   );
