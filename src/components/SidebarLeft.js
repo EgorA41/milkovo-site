@@ -2,7 +2,7 @@ import React from "react";
 
 export default function SidebarLeft() {
   return (
-    <aside className="w-64 p-6 text-white">
+    <aside className="w-64 pl-16 py-18 text-[18px] text-white">
       <nav className="space-y-6">
         <div className="pb-2">
           <h3 className="text-lg font-medium border-b-2 border-teal-400 pb-2 inline-block">
