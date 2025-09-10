@@ -4,9 +4,9 @@ import RouteLine from "../components/RouteLine";
 
 export default function MapWithRoute() {
   return (
-    <div className="relative w-full h-[600px]">
+    <div className="relative max-w-175 h-[600px]">
       <Map />
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute bottom-20 left-6 pointer-events-none">
         <RouteLine />
       </div>
     </div>

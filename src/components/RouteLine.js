@@ -1,54 +1,81 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useState, useEffect, useRef } from "react";
+
+const points = [
+    { id: 1, x: 92, y: 327, label: "Село 1" },
+    { id: 2, x: 201, y: 242, label: "Село 2" },
+    { id: 3, x: 336, y: 168, label: "Село 3" },
+    { id: 4, x: 432, y: 97, label: "Село 4" },
+  ];
 
 export default function MapRoute() {
   const pathRef = useRef(null);
-  const [length, setLength] = useState(0);
-  const [animate, setAnimate] = useState(false);
+  const [showPoints, setShowPoints] = useState(false)
 
   useEffect(() => {
-    if (pathRef.current) {
-      const totalLength = pathRef.current.getTotalLength();
-      setLength(totalLength);
-	  console.log(totalLength)
-      // запускаем анимацию после загрузки страницы
-      setTimeout(() => setAnimate(true), 3000);
-    }
+    const p = pathRef.current;
+    if (!p) return;
+
+    const len = p.getTotalLength();
+
+    p.style.strokeDasharray = len;
+    p.style.strokeDashoffset = len;
+    p.style.transition = "none";
+
+    requestAnimationFrame(() => {
+      p.style.transition = "stroke-dashoffset 2s ease-in-out";
+      p.style.strokeDashoffset = "0";
+	  p.addEventListener("transitionend", () => setShowPoints(true), {
+        once: true,
+      });
+    });
   }, []);
 
   return (
-    <svg
-      width="536"
-      height="370"
-      viewBox="0 0 536 370"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-auto"
-    >
-      <path
-        ref={pathRef}
-        d="M1.63972 319.343C8.01869 317.467 20.2138 315.741 17.9624 323.846C15.1481 333.977 -3.42593 363.808 7.26823 366.06C17.9624 368.311 14.0224 360.994 40.4764 351.426C66.9304 341.857 70.8703 350.3 92.8215 327.223C114.773 304.146 111.396 294.578 137.287 288.949C163.178 283.321 147.981 297.955 167.681 272.064C187.38 246.173 173.872 248.987 201.452 242.233C229.031 235.479 205.954 248.424 244.791 231.539C283.628 214.653 283.628 207.899 302.765 194.953C321.902 182.008 314.584 184.822 336.536 167.936C358.487 151.051 380.438 134.165 402.952 125.723C425.466 117.28 408.58 112.214 431.657 97.0173C454.734 81.8204 500.325 77.8804 507.079 69.4377C513.833 60.9949 516.648 57.055 513.833 52.5522C525.653 41.2952 522.276 39.6066 529.03 26.6611C534.434 16.3046 531.282 5.8356 529.03 1.89565"
-        stroke="url(#paint0_linear_4740_2811)"
-        strokeWidth="6"
+    <div className="relative inline-block">
+
+      <svg
+        width="536"
+        height="370"
+        viewBox="0 0 536 370"
         fill="none"
-        strokeDasharray={length}
-        strokeDashoffset={animate ? 0 : length}
-        style={{
-          transition: "stroke-dashoffset 3s ease-in-out",
-        }}
-      />
-      <defs>
-        <linearGradient
-          id="paint0_linear_4740_2811"
-          x1="-17.8216"
-          y1="351.907"
-          x2="259.429"
-          y2="-278.478"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#4FAFAF" />
-          <stop offset="1" stopColor="#4FAFAF" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-    </svg>
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          ref={pathRef}
+          d="M1.6 319.3C8 317.5 20.2 315.7 18 323.8C15.1 334 -3.4 363.8 7.3 366.1C18 368.3 14 361 40.5 351.4C66.9 341.9 70.9 350.3 92.8 327.2C114.8 304.1 111.4 294.6 137.3 288.9C163.2 283.3 148 298 167.7 272.1C187.4 246.2 173.9 249 201.5 242.2C229 235.5 206 248.4 244.8 231.5C283.6 214.7 283.6 207.9 302.8 195C321.9 182 314.6 184.8 336.5 167.9C358.5 151.1 380.4 134.2 403 125.7C425.5 117.3 408.6 112.2 431.7 97C454.7 81.8 500.3 77.9 507.1 69.4C513.8 61 516.6 57.1 513.8 52.6C525.7 41.3 522.3 39.6 529 26.7C534.4 16.3 531.3 5.8 529 1.9"
+          stroke="url(#paint0_linear_4740_2811)"
+          strokeWidth="6"
+          fill="none"
+        />
+        <defs>
+          <linearGradient
+            id="paint0_linear_4740_2811"
+            x1="-17.8"
+            y1="351.9"
+            x2="259.4"
+            y2="-278.5"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#4FAFAF" />
+            <stop offset="1" stopColor="#4FAFAF" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      {/* Абсолютно позиционированные кнопки */}
+      {showPoints &&
+        points.map((p) => (
+          <button
+
+            key={p.id}
+            className="absolute w-8 h-8 bg-white border-2 border-teal-500 rounded-full flex items-center justify-center text-[10px] text-teal-600 hover:bg-teal-500 hover:text-white transition"
+            style={{ top: p.y, left: p.x }}
+            title={p.label}
+            onClick={() => alert(`Клик по: ${p.label}`)}
+          >
+            {p.label[0]}
+          </button>
+        ))}
+    </div>
   );
 }
