@@ -18,11 +18,11 @@ export default function Stats() {
   ];
 
   return (
-    <div className="flex space-x-16 text-center mb-8 items-start">
+    <div className="flex w-24 h-24 space-x-8 text-center mb-8 items-start">
       {data.map((item, i) => (
         <div key={i} className="flex flex-col items-center">
           {/* контейнер для числа и арок */}
-          <div className="relative w-24 h-24 flex items-center justify-center mb-2">
+          <div className="relative flex flex-col h-14 items-center justify-start">
             {/* число */}
             <span className={`text-4xl font-bold ${item.className ?? "text-teal-400"}`}>
               {typeof item.value === "number"
@@ -31,7 +31,7 @@ export default function Stats() {
             </span>
 
             {/* верхняя (меньшая) арка — под цифрой */}
-            <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 pointer-events-none">
+            <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 pointer-events-none animate-pulse">
               <svg width="76" height="20" viewBox="0 0 76 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                 <defs>
                   <linearGradient id={`grad-top-${i}`} x1="38.1915" y1="-1.17296" x2="38.1915" y2="19.7439" gradientUnits="userSpaceOnUse">
@@ -47,7 +47,7 @@ export default function Stats() {
             </div>
 
             {/* нижняя (большая) арка */}
-            <div className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 pointer-events-none">
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-none animate-pulse">
               <svg width="96" height="25" viewBox="0 0 96 25" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                 <defs>
                   <linearGradient id={`grad-bottom-${i}`} x1="47.9346" y1="-1.68681" x2="47.9346" y2="24.4593" gradientUnits="userSpaceOnUse">
