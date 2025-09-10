@@ -20,7 +20,7 @@ export default function Stats() {
   return (
     <div className="flex w-24 h-24 space-x-8 text-center mb-8 items-start">
       {data.map((item, i) => (
-        <div key={i} className="flex flex-col items-center">
+        <div key={i} className="items-center">
           {/* контейнер для числа и арок */}
           <div className="relative flex flex-col h-14 items-center justify-start">
             {/* число */}

@@ -1,5 +1,5 @@
 import React from "react";
-import mapUrl from "../images/map.svg";
+import mapUrl from "../images/map.png";
 import wavesUrl from "../images/waves.svg";
 
 export default function Map() {

@@ -1,41 +1,46 @@
-import React, {useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import RoutePoint from "./RoutePoint";
 
 const points = [
-    { id: 1, x: 92, y: 327, label: "Село 1" },
-    { id: 2, x: 201, y: 242, label: "Село 2" },
-    { id: 3, x: 336, y: 168, label: "Село 3" },
-    { id: 4, x: 432, y: 97, label: "Село 4" },
-  ];
+  { id: 1, x: 60, y: 345, atop: true, label: "Пущино" },
+  { id: 2, x: 127, y: 293, label: "Шаромы" },
+  { id: 2, x: 225, y: 236, atop: true, label: "Мильково" },
+  { id: 2, x: 354, y: 153, atop: true, label: "Долиновка" },
+  { id: 3, x: 429, y: 100, label: "Таежный" },
+  { id: 3, x: 510, y: 30,atop: true, label: "Атласово" },
+  { id: 4, x: 573, y: 51, label: "Лазо" },
+];
 
-export default function MapRoute() {
+export default function RouteLine() {
   const pathRef = useRef(null);
-  const [showPoints, setShowPoints] = useState(false)
+  const [showPoints, setShowPoints] = useState(false);
 
   useEffect(() => {
     const p = pathRef.current;
     if (!p) return;
 
     const len = p.getTotalLength();
-
     p.style.strokeDasharray = len;
     p.style.strokeDashoffset = len;
     p.style.transition = "none";
 
     requestAnimationFrame(() => {
-      p.style.transition = "stroke-dashoffset 2s ease-in-out";
+      p.style.transition = "stroke-dashoffset 0.1s ease-in-out";
       p.style.strokeDashoffset = "0";
-	  p.addEventListener("transitionend", () => setShowPoints(true), {
+      p.addEventListener("transitionend", () => setShowPoints(true), {
         once: true,
       });
     });
   }, []);
 
-  return (
-    <div className="relative inline-block">
+  const handlePointClick = (point) => {
+    alert(`Клик по: ${point.label}`);
+  };
 
+  return (
+    <div className="relative w-[536px] h-[370px]">
       <svg
-        width="536"
-        height="370"
+        className="absolute top-0 left-0 z-10 w-full h-full"
         viewBox="0 0 536 370"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -62,20 +67,13 @@ export default function MapRoute() {
         </defs>
       </svg>
 
-      {/* Абсолютно позиционированные кнопки */}
-      {showPoints &&
-        points.map((p) => (
-          <button
-
-            key={p.id}
-            className="absolute w-8 h-8 bg-white border-2 border-teal-500 rounded-full flex items-center justify-center text-[10px] text-teal-600 hover:bg-teal-500 hover:text-white transition"
-            style={{ top: p.y, left: p.x }}
-            title={p.label}
-            onClick={() => alert(`Клик по: ${p.label}`)}
-          >
-            {p.label[0]}
-          </button>
-        ))}
+      {showPoints && points.map((point) => (
+        <RoutePoint
+          key={point.id}
+          point={point}
+          onClick={handlePointClick}
+        />
+      ))}
     </div>
   );
 }
